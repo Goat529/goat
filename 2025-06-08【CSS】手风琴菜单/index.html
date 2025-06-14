@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>山羊の前端小窝</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(45deg, rgba(142, 197, 252, 1.000) 0%,
+                    rgba(193, 210, 255, 1.000) 50%,
+                    rgba(224, 195, 255, 1.000) 100%)
+        }
+
+        .shell {
+            width: 1320px;
+            height: 700px;
+            display: flex;
+            border-radius: 10px;
+            overflow: hidden;
+            flex-direction: row;
+        }
+
+        .box {
+            position: relative;
+            width: 20%;
+            height: 100%;
+            overflow: hidden;
+            transition: .5s;
+            color: #fff;
+        }
+
+        .box:hover {
+            width: 80%;
+        }
+
+        .box:hover .text {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 200ms;
+        }
+
+        .box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .title {
+            position: absolute;
+            top: 1rem;
+            font-size: 1.5rem;
+            z-index: 2;
+            text-align: center;
+            width: 100%;
+        }
+
+        .text {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            font-size: 1.5rem;
+            padding-bottom: 1.5rem;
+            text-shadow: 0 0 10px rgb(60, 138, 255);
+            text-align: center;
+            z-index: 2;
+            opacity: 0;
+            transform: translateY(100%);
+            transition: all 500ms cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(to top, rgba(137, 152, 236, 0.8), transparent);
+        }
+
+        .box::before {
+            content: '';
+            position: absolute;
+            background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.25), transparent 25%, transparent 50%, rgba(0, 0, 0, 0.25));
+            inset: 0;
+            z-index: 1;
+        }
+        
+    </style>
+</head>
+
+<body>
+
+    <div class="shell">
+        <div class="box">
+            <h2 class="title">NO1</h2>
+            <img src="./images/01.jpg" alt="">
+            <p class="text">
+                劝君莫惜金缕衣，劝君惜取少年时。
+            </p>
+        </div>
+
+        <div class="box">
+            <h2 class="title">NO2</h2>
+            <img src="./images/02.jpg" alt="">
+            <p class="text">
+                劝君莫惜金缕衣，劝君惜取少年时。
+            </p>
+        </div>
+
+        <div class="box">
+            <h2 class="title">NO3</h2>
+            <img src="./images/03.jpg" alt="">
+            <p class="text">
+                劝君莫惜金缕衣，劝君惜取少年时。
+            </p>
+        </div>
+
+        <div class="box">
+            <h2 class="title">NO4</h2>
+            <img src="./images/04.jpg" alt="">
+            <p class="text">
+                劝君莫惜金缕衣，劝君惜取少年时。
+            </p>
+        </div>
+
+        <div class="box">
+            <h2 class="title">NO5</h2>
+            <img src="./images/05.jpg" alt="">
+            <p class="text">
+                劝君莫惜金缕衣，劝君惜取少年时。
+            </p>
+        </div>
+    </div>
+
+</body>
+
+</html>
