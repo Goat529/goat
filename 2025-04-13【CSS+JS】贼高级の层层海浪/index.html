@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>山羊の前端小窝</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000;
+        }
+
+        svg {
+            border: none;
+            width: 100vw;
+            height: 60vh;
+            position: absolute;
+            bottom: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <svg viewBox="0 0 1000 400" preserveAspectRatio="none" fill="currentColor">
+        <!-- 定义波浪形状 -->
+        <path id="wave" d="M 0 2000 0 300 Q 120 220 300 300 t 300 0 300 0 300 0 300 0 300 0 v400 z" />
+        <!-- 定义波浪运动路径 -->
+        <path id="wave-path" d="M -600 0 0 0" />
+        <g id="waves-container"></g>
+    </svg>
+
+</body>
+<script>
+
+    // 随机生成颜色
+    const randColor = () => `rgba(${Math.random() * 50 + 50},  
+     ${Math.random() * 100 + 150}, 
+      ${Math.random() * 50 + 200},  
+       ${(Math.random() * 0.3 + 0.2).toFixed(2)})`;
+    // 随机生成动画持续时间
+    const randDuration = () => `${(Math.random() * 20 + 3).toFixed(1)}s`;
+    // 随机生成波浪的位置
+    const randPos = i => ({
+        x: Math.random() * 100 - 50,  // 随机生成 x 坐标
+        y: -5 - i * 3 + Math.random() * 8 - 4
+    });
+    // 获取SVG
+    const container = document.getElementById('waves-container');
+    const svgNS = "http://www.w3.org/2000/svg";  // SVG命名空间，用于创建SVG元素
+    // 为每个波浪创建SVG元素并设置动画
+    Array.from({ length: 20 }, (_, i) => {  // 创建20个波浪
+        const { x, y } = randPos(i);  // 获取每个波浪的随机位置
+        const wave = {
+            x,
+            y,
+            fill: randColor(),
+            opacity: `${Math.floor(Math.random() * 70 + 5)}%`,  // 随机生成透明度（5%到75%之间）
+            duration: randDuration()  // 获取随机动画持续时间
+        };
+        // 创建 <use> 元素引用波浪形状
+        const use = document.createElementNS(svgNS, "use");
+        use.setAttribute("href", "#wave");  // 引用波浪路径
+        use.setAttribute("x", wave.x);  //  x 坐标
+        use.setAttribute("y", wave.y);
+        use.setAttribute("fill", wave.fill);  // 填充颜色
+        use.setAttribute("opacity", wave.opacity);  // 透明度
+        // 创建 <animateMotion> 元素，控制波浪的动画效果
+        const animate = document.createElementNS(svgNS, "animateMotion");
+        animate.setAttribute("dur", wave.duration);  // 设置动画持续时间
+        animate.setAttribute("repeatCount", "indefinite");  // 设置动画循环播放
+        const mpath = document.createElementNS(svgNS, "mpath");
+        mpath.setAttribute("href", "#wave-path");  // 运动路径
+        // 将动画路径添加到动画元素中
+        animate.appendChild(mpath);
+        // 将动画元素添加到 use 元素中
+        use.appendChild(animate);
+        // 将波浪添加到容器中
+        container.appendChild(use);
+    });
+    
+
+</script>
+
+</html>
